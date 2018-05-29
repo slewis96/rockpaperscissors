@@ -1,5 +1,8 @@
 var score = 0;
 var compscore = 0;
+var games = 0;
+var compgames = 0;
+// var scoreboard = document.getElementById("scoreboard");
 function beginGame(){
     var move = prompt("Enter your choice","(rock, paper, or scissors)");
     move.toLowerCase();
@@ -24,15 +27,12 @@ function beginGame(){
           alert("Congratulations you win!");
           score=0;
           compscore=0;
+          games++;
+          document.getElementById("scoreboard").innerHTML =
+            "<br>Scoreboard(bo5):<br>"+
+            "Your game wins: "+games+" <br>"+
+            "Computer game wins: "+compgames;
           document.getElementById("img").setAttribute("src", "imgs/victory.gif");
-          document.getElementById("button").setAttribute("onclick","endGame()");
-          document.getElementById("button").innerHTML = "Play again?";
-        }
-        else if(compscore==3){
-          alert("Gameover computer wins!");
-          score=0;
-          compscore=0;
-          document.getElementById("img").setAttribute("src", "imgs/failure.gif");
           document.getElementById("button").setAttribute("onclick","endGame()");
           document.getElementById("button").innerHTML = "Play again?";
         } else {
@@ -43,20 +43,17 @@ function beginGame(){
         alert("Loss!");
         compscore += 1;
         alert("You: " + score + "   Computer: " + compscore);
-        if(score==3){
-          alert("Congratulations you win!");
-          score=0;
-          compscore=0;
-          document.getElementById("img").setAttribute("src", "imgs/victory");
-          document.getElementById("button").setAttribute("onclick","endGame()");
-          document.getElementById("button").innerHTML = "Play again?";
-        }
-        else if(compscore==3){
+        if(compscore==3){
           alert("Gameover computer wins!");
           score=0;
           compscore=0;
           score=0;
           compscore=0;
+          compgames++;
+          document.getElementById("scoreboard").innerHTML =
+            "<br>Scoreboard(bo5):<br>"+
+            "Your game wins: "+games+" <br>"+
+            "Computer game wins: "+compgames;
           document.getElementById("img").setAttribute("src", "imgs/failure.gif");
           document.getElementById("button").setAttribute("onclick","endGame()");
           document.getElementById("button").innerHTML = "Play again?";
@@ -114,5 +111,7 @@ function calculateWinner(mv1, mv2){
   }
 }
 function endGame(){
-  location.reload();
+  document.getElementById("img").setAttribute("src", "imgs/rps.gif");
+  document.getElementById("button").setAttribute("onclick","beginGame()");
+  document.getElementById("button").innerHTML = "Start game";
 }
