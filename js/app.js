@@ -4,15 +4,19 @@ var games = 0;
 var compgames = 0;
 // var scoreboard = document.getElementById("scoreboard");
 function beginGame(){
+  //get user input
     var move = prompt("Enter your choice","(rock, paper, or scissors)");
     move.toLowerCase();
+  //don't continue until correct input
     if(move!=="rock"&&move!=="paper"&&move!=="scissors"&&move!=="raygun"){
       alert("invalid input");
       beginGame();
     }
     else{
+    //get comp move
       var compmove = getCompMove();
       alert(move+" "+compmove);
+    //compare moves get winner bool
       var result = calculateWinner(move, compmove);
       if(result==undefined){
         alert("Draw!");
@@ -23,11 +27,13 @@ function beginGame(){
         alert("Win!");
         score += 1;
         alert("You: " + score + "   Computer: " + compscore);
+      //you win
         if(score==3){
           alert("Congratulations you win!");
           score=0;
           compscore=0;
           games++;
+        //useless html stuff
           document.getElementById("scoreboard").innerHTML =
             "<br>Scoreboard(bo5):<br>"+
             "Your game wins: "+games+" <br>"+
@@ -43,6 +49,7 @@ function beginGame(){
         alert("Loss!");
         compscore += 1;
         alert("You: " + score + "   Computer: " + compscore);
+      //comp wins
         if(compscore==3){
           alert("Gameover computer wins!");
           score=0;
@@ -50,6 +57,7 @@ function beginGame(){
           score=0;
           compscore=0;
           compgames++;
+        //useless html stuff
           document.getElementById("scoreboard").innerHTML =
             "<br>Scoreboard(bo5):<br>"+
             "Your game wins: "+games+" <br>"+
@@ -80,9 +88,6 @@ function calculateWinner(mv1, mv2){
     return true;
   }
   //rock
-  if(mv1=="rock" && mv2=="rock"){
-    return undefined;
-  }
   if(mv1=="rock" && mv2=="scissors"){
     return true;
   }
@@ -90,9 +95,6 @@ function calculateWinner(mv1, mv2){
     return false;
   }
   //paper
-  if(mv1=="paper" && mv2=="paper"){
-    return undefined;
-  }
   if(mv1=="paper" && mv2=="rock"){
     return true;
   }
@@ -100,14 +102,14 @@ function calculateWinner(mv1, mv2){
     return false;
   }
   //scissors
-  if(mv1=="scissors" && mv2=="scissors"){
-    return undefined;
-  }
   if(mv1=="scissors" && mv2=="paper"){
     return true;
   }
   if(mv1=="scissors" && mv2=="rock"){
     return false;
+  }
+  else{
+    return undefined;
   }
 }
 function endGame(){
